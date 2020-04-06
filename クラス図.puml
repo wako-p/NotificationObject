@@ -1,0 +1,38 @@
+
+@startuml NotificationObject
+
+class UserId
+class UserName
+
+class User
+User : Id: UserId
+User : Name: UserName
+User : Notify(IUserDataModelNotification): void
+
+interface IUserDataModelNotification
+IUserDataModelNotification : Id(UserId): void
+IUserDataModelNotification : Name(UserName): void
+IUserDataModelNotification : Build(): UserDataModel
+
+class UserDataModelBuilder
+' UserDataModelBuilder : Id(UserId): void
+' UserDataModelBuilder : Name(UserName): void
+' UserDataModelBuilder : Build(): UserDataModel
+
+class UserDataModel
+UserDataModel : Id: string
+UserDataModel : Name: string
+
+
+
+User --> UserId
+User --> UserName
+User ..> IUserDataModelNotification
+
+IUserDataModelNotification <|.. UserDataModelBuilder
+IUserDataModelNotification ..> UserDataModel : <<create>>
+' UserDataModelBuilder ..> UserDataModel
+
+
+
+@enduml
