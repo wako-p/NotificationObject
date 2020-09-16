@@ -3,19 +3,19 @@ namespace Domain.Models.Users
 {
     public class User
     {
-        public UserId   Id   { get; private set; }
-        public UserName Name { get; private set; }
+        private readonly UserId id;
+        private UserName name;
 
         public User(UserId id, UserName name)
         {
-            this.Id   = id;
-            this.Name = name;
+            this.id   = id;
+            this.name = name;
         }
 
         public void Notify(IUserDataModelNotification note)
         {
-            note.Id(this.Id);
-            note.Name(this.Name);
+            note.Id(this.id);
+            note.Name(this.name);
         }
     }
 }
